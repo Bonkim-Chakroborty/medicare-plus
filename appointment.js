@@ -22,6 +22,9 @@ const STEPS = [
 ];
 
 function AppointmentPage(params, query) {
+  // 🔧 Responsive CSS inject (defined in dashboard.js)
+  if (typeof injectResponsiveCSS === 'function') injectResponsiveCSS();
+
   WIZ.step = 1; WIZ.dept = ''; WIZ.doctorId = query.doctor || '';
   WIZ.date = ''; WIZ.time = ''; WIZ.name = ''; WIZ.phone = '';
   WIZ.email = ''; WIZ.age = ''; WIZ.gender = ''; WIZ.problem = '';
@@ -100,7 +103,7 @@ function stepDoctor() {
     <p class="text-muted small mt-1" style="margin-bottom:22px">${docs.length} specialist${docs.length === 1 ? '' : 's'} available in ${esc((DATA.departments.find(x => x.id === WIZ.dept) || {}).name || '')}.</p>
     <div class="stack" style="gap:12px">
       ${docs.map(d => `
-        <button class="option ${WIZ.doctorId === d.id ? 'selected' : ''}" data-doc="${d.id}" style="flex-direction:row;align-items:center;gap:16px">
+        <button class="option doc-option ${WIZ.doctorId === d.id ? 'selected' : ''}" data-doc="${d.id}">
           <!-- 📷 DEMO IMAGE: ডাক্তারের ছবি (পরে পরিবর্তন করুন) -->
           ${d.img ? `<img src="${d.img}" alt="${esc(d.name)}" class="doc-avatar img-animated" style="width:52px;height:52px">` : avatar(d.name, 52)}
           <div style="flex:1;text-align:left">
@@ -230,7 +233,7 @@ function stepReview() {
       <div class="summary-row"><span>Email</span><b>${esc(WIZ.email)}</b></div>
       <div class="summary-row"><span>Age / Gender</span><b>${esc(WIZ.age)} · ${esc(WIZ.gender)}</b></div>
       <div class="summary-row"><span>Consultation fee</span><b>${money(doc ? doc.fee : 0)}</b></div>
-      <div class="summary-row"><span>Reason</span><b style="max-width:60%;font-weight:500">${esc(WIZ.problem)}</b></div>
+      <div class="summary-row"><span>Reason</span><b style="font-weight:500;word-break:break-word">${esc(WIZ.problem)}</b></div>
     </div>
   </div>
   <p class="small text-muted mt-3"><i class="fa-solid fa-circle-info"></i> This is a demo booking. No real appointment is created and no payment is taken.</p>

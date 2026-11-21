@@ -298,7 +298,92 @@ img, svg, video, canvas { max-width: 100% !important; height: auto; }
   .doc-welcome-banner { padding: 14px !important; }
   .dwb-left h2 { font-size: .95rem !important; }
 }
+/* ============================================================
+   MEDICARE PLUS — responsive.css
+   Mobile-friendly overrides for appointment + dashboards
+   ============================================================ */
 
+.doc-option { flex-direction: row !important; align-items: center !important; gap: 16px !important; }
+
+@media (max-width: 1024px) {
+  .stat-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .panel-grid { grid-template-columns: 1fr !important; }
+  .quick-actions-grid { grid-template-columns: repeat(2,1fr) !important; }
+}
+
+@media (max-width: 900px) {
+  .portal { display: block !important; }
+  .p-sidebar {
+    position: fixed !important; top:0; left:0; bottom:0;
+    width: 280px !important; max-width: 85vw;
+    z-index: 10000 !important;
+    transform: translateX(-100%) !important;
+    transition: transform .28s ease;
+    overflow-y: auto;
+  }
+  .p-sidebar.open { transform: translateX(0) !important; }
+  .p-scrim { position: fixed; inset:0; background: rgba(15,23,42,.55); z-index: 9999; display: none; }
+  .p-scrim.show { display: block !important; }
+  .p-main { width: 100% !important; margin-left: 0 !important; }
+  .p-search { display: none !important; }
+  .p-user > div { display: none !important; }
+  .table-wrap { overflow-x:auto !important; -webkit-overflow-scrolling:touch; display:block; }
+  .data { min-width: 640px; }
+  .form-row { display: block !important; }
+  .form-row .field { margin-bottom: 14px; }
+  .summary-row { flex-direction: column !important; align-items:flex-start !important; gap:4px; }
+  .summary-row b, .summary-row b[style] { max-width: 100% !important; word-break: break-word; }
+  .doc-welcome-banner { flex-direction: column !important; text-align:center !important; gap:16px; }
+  .dwb-right { display: none !important; }
+  .week-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .wizard-steps { overflow-x:auto !important; flex-wrap:nowrap !important; padding-bottom:6px; }
+  .wstep { flex: 0 0 auto !important; }
+}
+
+@media (max-width: 640px) {
+  .stat-grid { grid-template-columns: 1fr !important; gap:10px !important; }
+  .panel-head { flex-direction: column !important; align-items:flex-start !important; gap:10px !important; }
+  .panel-head h2 { font-size: 1rem !important; }
+  .panel-body { padding: 14px 16px !important; }
+  .quick-actions-grid { grid-template-columns: 1fr 1fr !important; gap:10px !important; }
+  .dwb-actions { flex-direction: column; }
+  .dwb-actions .btn { width: 100%; }
+  .option-grid { grid-template-columns: 1fr !important; gap:10px !important; }
+  .doc-option { flex-direction: column !important; text-align: center !important; align-items: center !important; padding: 14px 12px !important; }
+  .doc-option > div { text-align: center !important; }
+  .doc-option .badge { margin-top: 8px; }
+  .doc-option img, .doc-option .avatar-img { width:60px !important; height:60px !important; }
+  .slot-grid { grid-template-columns: repeat(2,1fr) !important; gap:8px !important; }
+  .wizard-actions { flex-direction: column-reverse !important; gap:10px !important; }
+  .wizard-actions .btn { width: 100%; }
+  .wstep span:not(.n) { display:none; }
+  .wstep.active span:not(.n) { display:inline; font-size:.75rem; }
+  .success-panel .flex { flex-direction: column; }
+  .success-panel .flex .btn { width: 100%; }
+  .doc-timeline-item { flex-direction: column !important; align-items:flex-start !important; gap:6px; }
+  .dti-actions { flex-wrap: wrap; width:100%; gap:6px; margin-top:8px; }
+  .queue-item { flex-wrap: wrap !important; gap:8px !important; }
+  .qi-info { flex: 1 1 100%; }
+  .revenue-chart { gap:4px !important; height:160px !important; }
+  .rev-val { display: none !important; }
+  .rev-summary { flex-direction: column !important; gap:10px; }
+  .tab-pills { width:100% !important; overflow-x:auto !important; white-space:nowrap; }
+  .tab-pills .pill { flex: 0 0 auto !important; }
+  .week-grid { grid-template-columns: 1fr !important; }
+  .rx-row { flex-direction: column !important; align-items:flex-start !important; gap:4px; }
+  .pdm-header { flex-direction: column !important; text-align:center !important; gap:10px !important; }
+  .modal, .modal-dialog, .modal-content {
+    width: 100% !important; max-width: 100% !important;
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 92vh !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .quick-actions-grid { grid-template-columns: 1fr !important; }
+  .slot-grid { grid-template-columns: 1fr !important; }
+  .p-content { padding: 10px !important; }
+}
 /* ============================================================
    ≤ 400px  — Extra small
    ============================================================ */
