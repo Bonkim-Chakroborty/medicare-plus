@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MEDICARE PLUS — Your Health, Our Priority</title>
+<meta name="description" content="MEDICARE PLUS is a premium healthcare clinic offering world-class specialists, modern diagnostics and easy online appointment booking." />
+<!-- ⬇️⬇️ এখানে ওয়েবসাইটের Favicon পরিবর্তন করুন ⬇️⬇️ -->
+<!-- <link rel="icon" type="image/png" href="images/favicon.png"> -->
+<!-- ⬆️⬆️ উপরে আপনার Favicon ফাইলের লিংক দিন ⬆️⬆️ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="doctor-auth.css">
+</head>
+<body data-layout="site">
+
+  <!-- ============ PUBLIC SITE CHROME ============ -->
+  <div id="chrome">
+    <div id="topbar"></div>
+    <header id="site-header"></header>
+    <main id="view" tabindex="-1"></main>
+    <footer id="site-footer"></footer>
+  </div>
+
+  <!-- ============ PORTAL MOUNT ============ -->
+  <div id="portal"></div>
+
+  <!-- ============ GLOBAL UI ============ -->
+  <div id="toast-stack" class="toast-stack" aria-live="polite"></div>
+  <div id="modal-root"></div>
+
+  <script src="demo-data.js"></script>
+  <script src="main.js"></script>
+  <script src="pages.js"></script>
+  <script src="appointment.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="doctor-auth.js"></script>
+</body>
+</html>
