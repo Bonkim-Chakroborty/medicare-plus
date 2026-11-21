@@ -1,125 +1,203 @@
 /* ============================================================
    MEDICARE PLUS — responsive.css
-   Global Responsive Breakpoints (Mobile, Tablet, Desktop)
+   Add AFTER your main stylesheet.
+   Covers: appointment wizard + patient/doctor/admin portals
    ============================================================ */
 
-/* ---------- Tablet / Smaller Desktops (<= 1024px) ---------- */
-@media (max-width: 1024px) {
-  .nav-links {
-    display: none !important;
-  }
-  .hamburger {
-    display: grid !important;
-  }
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-    gap: 40px !important;
-  }
-  .hero-visual {
-    max-width: 540px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  .split {
-    grid-template-columns: 1fr !important;
-    gap: 36px !important;
-  }
-  .g-4 {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .g-3 {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 36px !important;
-  }
-}
+/* ---------- Base hardening ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { max-width: 100%; overflow-x: hidden; }
+img, svg, video, canvas { max-width: 100%; height: auto; }
 
-/* ---------- Mobile Devices (<= 768px) ---------- */
-@media (max-width: 768px) {
-  .container {
-    padding-inline: 18px !important;
-  }
-  .section {
-    padding: 48px 0 !important;
-  }
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 18px !important;
-  }
-  .stat {
-    border-right: 0 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding-bottom: 16px !important;
-  }
-  .stat:nth-child(3),
-  .stat:nth-child(4) {
-    border-bottom: 0 !important;
-  }
-  .g-2, .g-3, .g-4 {
-    grid-template-columns: 1fr !important;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .hero-trust {
+/* Desktop: keep burger & scrim hidden */
+.p-burger { display: none; }
+.p-scrim  { display: none; }
+
+/* ============================================================
+   TABLET — up to 1024px
+   ============================================================ */
+@media (max-width: 1024px) {
+  .panel-grid { grid-template-columns: 1fr !important; }
+  .stat-grid  { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+  .week-grid  { grid-template-columns: repeat(3, minmax(0,1fr)) !important; }
+  .option-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+  .slot-grid   { grid-template-columns: repeat(3, minmax(0,1fr)) !important; }
+  .quick-actions-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+
+  .doc-welcome-banner {
     flex-direction: column !important;
     align-items: flex-start !important;
-    gap: 12px !important;
+    gap: 14px;
   }
-  .quick-search {
-    flex-direction: column !important;
-    padding: 18px !important;
+  .dwb-avatar { width: 84px !important; height: 84px !important; align-self: flex-end; }
+}
+
+/* ============================================================
+   MOBILE — up to 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* --- Portal off-canvas sidebar --- */
+  .portal { display: block !important; position: relative; }
+  .p-sidebar {
+    position: fixed !important;
+    top: 0; left: 0; bottom: 0;
+    width: 270px !important;
+    max-width: 84vw !important;
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+    z-index: 1200;
+    overflow-y: auto;
   }
-  .quick-search .btn {
+  .p-sidebar.open { transform: translateX(0) !important; }
+  .p-scrim {
+    display: block !important;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s;
+    z-index: 1100;
+  }
+  .p-scrim.show { opacity: 1; pointer-events: auto; }
+  .p-main { width: 100% !important; margin: 0 !important; }
+  .p-burger {
+    display: inline-flex !important;
+    align-items: center; justify-content: center;
+  }
+
+  /* --- Topbar --- */
+  .p-topbar { padding: 10px 12px !important; gap: 8px; flex-wrap: wrap; }
+  .p-topbar-left  { flex: 1 1 auto; min-width: 0; }
+  .p-topbar-left h1 { font-size: .95rem !important; margin: 0; }
+  .p-topbar-right { gap: 6px !important; flex-wrap: wrap; }
+  .p-search { display: none !important; }
+  .p-user div { display: none !important; }
+  .p-user img { width: 30px !important; height: 30px !important; }
+  .p-icon-btn { width: 36px !important; height: 36px !important; }
+  .p-content { padding: 14px !important; }
+
+  /* --- Stat cards & panels --- */
+  .stat-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 10px !important; }
+  .stat-card { padding: 12px !important; border-radius: 12px !important; }
+  .sc-val    { font-size: 1.2rem !important; }
+  .sc-label  { font-size: .7rem !important; }
+  .panel-head { flex-wrap: wrap; gap: 10px; }
+  .panel-head h2 { font-size: 1rem !important; }
+  .panel-body { padding: 14px !important; }
+
+  /* --- Wizard steps (horizontal scroll) --- */
+  .wizard-steps {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 6px;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+  }
+  .wizard-steps::-webkit-scrollbar { display: none; }
+  .wstep { flex: 0 0 auto; padding: 6px 10px; font-size: .72rem; white-space: nowrap; }
+  .wstep .n { width: 22px; height: 22px; font-size: .7rem; }
+  .wizard-actions { flex-direction: column-reverse; gap: 10px; }
+  .wizard-actions > * { width: 100%; }
+  .wizard-actions .btn { justify-content: center; }
+
+  /* --- Option grid (departments / doctors) --- */
+  .option-grid { grid-template-columns: 1fr !important; }
+  .option { padding: 14px !important; }
+  .option[style*="row"] { flex-wrap: wrap; }
+
+  /* --- Calendar --- */
+  .cal-grid  { gap: 4px !important; }
+  .cal-cell  { height: 38px !important; font-size: .82rem; border-radius: 8px !important; }
+  .cal-head b { font-size: .9rem; }
+  .cal-days span { font-size: .65rem; }
+
+  /* --- Time slots --- */
+  .slot-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 8px !important; }
+  .slot { padding: 10px 6px !important; font-size: .78rem; }
+
+  /* --- Forms (stack inputs) --- */
+  .form-row { flex-direction: column !important; gap: 0 !important; }
+  .field input, .field select, .field textarea {
+    font-size: 16px !important;   /* iOS: prevent auto-zoom */
     width: 100% !important;
   }
-  .cta-banner {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 24px !important;
+
+  /* --- Tables (horizontal scroll) --- */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table.data  { min-width: 620px; }
+  table.data th, table.data td { padding: 10px 8px !important; font-size: .8rem; }
+
+  /* --- Welcome banner --- */
+  .doc-welcome-banner { padding: 16px !important; }
+  .dwb-left h2 { font-size: 1.05rem !important; }
+  .dwb-actions { flex-wrap: wrap; gap: 8px; }
+  .dwb-actions .btn { flex: 1 1 auto; justify-content: center; }
+
+  /* --- Live queue --- */
+  .queue-number { font-size: 2rem !important; }
+  .queue-item { flex-wrap: wrap; gap: 8px; }
+
+  /* --- Revenue chart --- */
+  .revenue-chart { height: 130px !important; gap: 4px !important; }
+  .rev-val { display: none; }
+  .rev-label { font-size: .65rem; }
+  .rev-summary { flex-direction: column; gap: 8px; text-align: center; }
+
+  /* --- Week grid (schedule) --- */
+  .week-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 8px !important; }
+
+  /* --- Prescription rows --- */
+  .med-row { padding: 12px !important; }
+
+  /* --- Summary rows (review page) --- */
+  .summary-row { flex-wrap: wrap; gap: 3px; }
+  .summary-row b { max-width: 100% !important; text-align: left !important; }
+
+  /* --- Success panel --- */
+  .success-panel { padding: 20px 14px !important; }
+  .success-panel .flex { flex-direction: column; }
+  .success-panel .flex .btn { width: 100%; }
+
+  /* --- Tabs / pills --- */
+  .tab-pills { flex-wrap: wrap; gap: 6px; }
+  .pill { font-size: .72rem; padding: 5px 10px; }
+
+  /* --- Modal (full width on mobile) --- */
+  .modal, .modal-box, .modal-content {
+    width: 96vw !important;
+    max-width: 96vw !important;
+    max-height: 92vh !important;
+    margin: 4vh auto !important;
   }
-  .cta-actions {
-    flex-direction: column !important;
-    width: 100% !important;
-  }
-  .cta-actions .btn {
-    width: 100% !important;
-  }
-  .topbar-list span {
-    display: none !important;
-  }
-  .toolbar {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  .contact-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .form-row {
-    grid-template-columns: 1fr !important;
+
+  /* --- Safe tap targets --- */
+  button, .btn, .icon-btn, .p-icon-btn, .cal-cell, .slot, .option {
+    min-height: 40px;
+    touch-action: manipulation;
   }
 }
 
-/* ---------- Small Phones (<= 480px) ---------- */
+/* ============================================================
+   SMALL PHONES — up to 480px
+   ============================================================ */
 @media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .stat {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-  }
-  .stat:last-child {
-    border-bottom: 0 !important;
-  }
-  .topbar-portals {
-    display: none !important;
-  }
-  .hero-cta {
-    flex-direction: column !important;
-  }
-  .hero-cta .btn {
-    width: 100% !important;
-  }
+  .stat-grid { grid-template-columns: 1fr !important; }
+  .week-grid { grid-template-columns: 1fr !important; }
+  .quick-actions-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .p-content { padding: 12px !important; }
+  .cal-cell  { height: 34px !important; font-size: .76rem; }
+  .btn     { font-size: .82rem; padding: 9px 14px; }
+  .btn-sm  { font-size: .74rem; padding: 7px 10px; }
+  .doc-welcome-banner { padding: 14px !important; }
+  .dwb-left h2 { font-size: .95rem !important; }
+}
+
+/* ============================================================
+   PRESERVE DESKTOP LAYOUT (>= 769px)
+   ============================================================ */
+@media (min-width: 769px) {
+  .p-sidebar { transform: none !important; position: relative !important; }
+  .p-scrim   { display: none !important; }
+  .p-main    { flex: 1; min-width: 0; }
 }
